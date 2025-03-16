@@ -3,26 +3,21 @@ package unique_paths_62;
 /* import java.util.HashMap;
 import java.util.Map; */
 
-import java.util.Arrays;
-
 class Solution {
   /*
    Better Solution
   */
   public int uniquePaths(int m, int n) {
-    int[] aboveRow = new int[n];
-    Arrays.fill(aboveRow, 1);
-
-    for (int r = 1; r < m; r++) {
-      int[] currentRow = new int[n];
-      currentRow[0] = 1;
-      for (int c = 1; c < n; c++) {
-        currentRow[c] = currentRow[c - 1] + aboveRow[c];
+    int[] row = new int[n];
+    row[0] = 1;
+    for (int r = 0; r < m; r++) {
+      for (int c = 0; c < n; c++) {
+        if (c > 0) {
+          row[c] += row[c - 1];
+        }
       }
-      aboveRow = currentRow;
     }
-
-    return aboveRow[n - 1];
+    return row[n - 1];
   }
 
   /* public int uniquePaths(int m, int n) {
